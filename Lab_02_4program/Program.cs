@@ -12,12 +12,13 @@ namespace Lab_02_4program
                 Console.Write("Write x: ");
                 float x = Single.Parse(Console.ReadLine());
                 Console.Write("Write number of terms Q: ");
-                uint q = UInt32.Parse(Console.ReadLine());
+                float q = Single.Parse(Console.ReadLine());
                 double cos_x = 0.0;
                 int degree_x_and_factorial = 0;
                 double factorial = 1.0;
-                // uint metre_of_terms = UInt32.MinValue;
-                for (int i = 0; i < q; i++)
+                uint metre_of_terms = UInt32.MinValue;
+                double term = 0.0;
+                for (int i = 0; true; i++)
                 {
                     if (i % 2 == 0)
                     {
@@ -25,7 +26,8 @@ namespace Lab_02_4program
                         {
                             factorial *= j;
                         }
-                        cos_x += Math.Pow(x, degree_x_and_factorial) / factorial;
+                        term = Math.Pow(x, degree_x_and_factorial) / factorial;
+                        cos_x += term;
                         degree_x_and_factorial += 2;
                         factorial = 1.0;
                     }
@@ -35,19 +37,20 @@ namespace Lab_02_4program
                         {
                             factorial *= j;
                         }
-                        cos_x -= Math.Pow(x, degree_x_and_factorial) / factorial;
+                        term = Math.Pow(x, degree_x_and_factorial) / factorial;
+                        cos_x -= term;
                         degree_x_and_factorial += 2;
                         factorial = 1.0;
-                    }/*
-                    if (Math.Abs(term) < q)
+                    }
+                    if (Math.Abs(term) > q)
                     {
-                        Console.Write($"Number of successful terms: {metre_of_terms}");
-                        break;
+                        metre_of_terms++;
                     }
                     else 
                     {
-                        metre_of_terms++;
-                    } */
+                        Console.Write($"Number of successful terms: {metre_of_terms}");
+                        break;
+                    } 
                 }
                 Console.WriteLine($"\nCos(x) = {cos_x}");
                 Console.ReadKey();
